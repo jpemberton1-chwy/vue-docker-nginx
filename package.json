@@ -6,11 +6,15 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "docker:build": "yarn build && docker build -t vue-nginx-test:latest .",
+    "docker:stop": "docker rm --force vue-nginx-test_web",
+    "docker:run": "yarn docker:stop | /dev/null; yarn docker:build && docker run --name vue-nginx-test_web -p 8080:8080 -d vue-nginx-test:latest"
   },
   "dependencies": {
     "core-js": "^3.4.4",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
